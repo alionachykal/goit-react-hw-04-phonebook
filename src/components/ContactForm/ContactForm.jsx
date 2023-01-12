@@ -1,41 +1,38 @@
 import propTypes from 'prop-types';
-import React, { Component } from 'react';
+
 import css from './ContactForm.module.css';
+import { useState } from 'react';
 
 
 
 
 
-export class ContactForm extends Component {
+export const ContactForm = ({handleSubmit})=> {
 
-  static propTypes = {
-    onSubmit: propTypes.func.isRequired,
-  };
+  const [name, setName] = useState('')
+  const [number,setNumber] = useState('')
     
-  state = {
-    name: '',
-    number: '',
-  };
+
  
     
- hanldeChange = event => {
+   const hanldeChange = event => {
     const { name, value } = event.currentTarget;
 
-    this.setState({
+    ContactForm({
       [name]: value,
     });
   };
 
-  handleSubmit = e => {
+  const handleSubmit = e => {
      e.preventDefault();
-    const { addNewContact } = this.props;
-    addNewContact({ ...this.state });
-    this.setState({ name: '', number: '' });
+    const { addNewContact } = props;
+    addNewContact({ ...ContactForm });
+    setContactForm({ name: '', number: '' });
   };
   
 
-  render() {
-    const { name, number } = this.state;
+
+    // const { name, number } = ContactForm;
 
     return (
       <form className={css.form} onSubmit={this.handleSubmit} >
@@ -71,4 +68,3 @@ export class ContactForm extends Component {
       </form>
     );
   }
-}
