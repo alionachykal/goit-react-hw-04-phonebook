@@ -20,7 +20,6 @@ export const App = () => {
 
 
  const addNewContact = data  => {
-    const { contacts } = setContacts;
     const newContact = {
       id: nanoid(),
       ...data,
@@ -29,14 +28,14 @@ export const App = () => {
     
         ? alert(`${newContact.name} is already in contacts.`)
         : setContacts(prev=> ({
-          setContacts: [...prev.contacts, newContact],
+          setContacts: [...prev, newContact],
     }));
 
   };
  
      
-    const handleDelete = (contactId) => {
-      setContacts(prev => prev.contacts.filter(contact => contact.id !== contactId));
+    const handleDelete = contactId => {
+      setContacts(prev => prev.filter(contact => contact.id !== contactId));
    
     };
 
@@ -46,19 +45,18 @@ export const App = () => {
     }, [contacts]);
 
     const getFilteredContacts = () => {
-    const filterContactsList = contacts.filter(contact => {
-      return contact.name
-        .toLowerCase()
-        .includes(setContacts.filter.toLowerCase());
-    });
+    const filterContactsList = filter.toLowerCase();
+      return contacts.filter(({ name }) =>
+        name.toLowerCase()
+          .includes(filterContactsList));
+    };
   //       const getFilteredContacts = useMemo(() => {
   //   return contacts.filter(contact =>
   //     contact.name.toLowerCase().includes(filter.toLowerCase()),
   //   );
   // }, []);
 
-    return filterContactsList;
-    };
+  
 
       const handleChange = e => {
     const { name, value } = e.target;
@@ -91,6 +89,7 @@ export const App = () => {
       </div>
     );
   }
+
 
 
 

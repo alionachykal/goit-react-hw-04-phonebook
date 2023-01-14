@@ -4,28 +4,22 @@ import { useState } from 'react';
 import css from './ContactForm.module.css';
 
 
-export const ContactForm = () => {
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState('')
-  
+export const ContactForm =  ({addNewContact}) => {
+ const [state,setState] = useState({
+  name:'',
+  number:'',
+ })
 
+ const handleChange = e => {
+  const { name,value } = e.target;
+  setState(prev => ({...prev,[name]:value}))
+};
 
-  const handleChangeName = e => {
-    const { value } = e.target;
-    setName(value);
-  };
-
-  const handleChangeNumber = e => {
-    const { value } = e.target;
-    setNumber(value);
-  };
-  
 const  handleSubmit = e => {
-     e.preventDefault();
-    const { addNewContact } = setName;
-     addNewContact({ ...setName});
-   setName({ name: '' })
-    setNumber({ number: '' });
+   e.preventDefault();
+  addNewContact({ ...state });
+  setState({ name: '', number: '' });
+
   };
 
   
@@ -41,8 +35,8 @@ const  handleSubmit = e => {
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           required
           placeholder="Enter name"
-          value={name}
-          onChange={handleChangeName}
+          value={state.name}
+          onChange={handleChange}
         />
         <label htmlFor='number' className={css.formLabel}>Number </label>
         <input
@@ -54,8 +48,8 @@ const  handleSubmit = e => {
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required
           placeholder="Enter phone number"
-          value={number}
-          onChange={handleChangeNumber}
+          value={state.number}
+          onChange={handleChange}
         />
         <button  className={css.formBtn} type="submit" >
           Add contact
