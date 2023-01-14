@@ -27,12 +27,10 @@ export const App = () => {
     contacts.some(({ name }) => name === data.name)
     
         ? alert(`${newContact.name} is already in contacts.`)
-        : setContacts(prev=> ({
-          setContacts: [...prev, newContact],
-    }));
+        :setContacts(prev => [...prev, newContact]);
+    };
 
-  };
- 
+
      
     const handleDelete = contactId => {
       setContacts(prev => prev.filter(contact => contact.id !== contactId));
@@ -81,7 +79,7 @@ export const App = () => {
         <h1>Phonebook</h1>
         <ContactForm addNewContact={addNewContact} />
         <h2> Contacts</h2>
-        <Filter filter={contacts.filter} handleChange={handleChange} />
+        <Filter filter={filter} handleChange={handleChange} />
         <ContactList
           contacts={getFilteredContacts()}
           handleDelete={handleDelete}
