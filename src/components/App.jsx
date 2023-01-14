@@ -51,6 +51,11 @@ export const App = () => {
         .toLowerCase()
         .includes(setContacts.filter.toLowerCase());
     });
+  //       const getFilteredContacts = useMemo(() => {
+  //   return contacts.filter(contact =>
+  //     contact.name.toLowerCase().includes(filter.toLowerCase()),
+  //   );
+  // }, []);
 
     return filterContactsList;
     };

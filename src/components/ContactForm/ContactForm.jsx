@@ -20,19 +20,14 @@ export const ContactForm = () => {
     setNumber(value);
   };
   
-// const  handleSubmit = e => {
-//      e.preventDefault();
-//     const { addNewContact } = setName;
-//      addNewContact({ ...setName});
-//    setName({ name: '' })
-//     setNumber({ number: '' });
-//   };
-  const handleSubmit = e => {
+const  handleSubmit = e => {
      e.preventDefault();
-    const { addNewContact } = ContactForm;
-    addNewContact({ ...ContactForm});
-    this.setState({ name: '', number: '' });
+    const { addNewContact } = setName;
+     addNewContact({ ...setName});
+   setName({ name: '' })
+    setNumber({ number: '' });
   };
+
   
     return (
       <form className={css.form} onSubmit={handleSubmit} >
