@@ -5,7 +5,7 @@ import css from './ContactForm.module.css';
 
 
 export const ContactForm =  ({addNewContact}) => {
- const [state,setState] = useState({
+ const [state, setState] = useState({
   name:'',
   number:'',
  })

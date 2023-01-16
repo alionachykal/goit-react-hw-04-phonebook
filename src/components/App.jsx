@@ -39,28 +39,28 @@ export const App = () => {
 
     useEffect(() => {
       localStorage.setItem('contacts', JSON.stringify(contacts))
-      
     }, [contacts]);
 
-    const getFilteredContacts = () => {
-    const filterContactsList = filter.toLowerCase();
-      return contacts.filter(({ name }) =>
-        name.toLowerCase()
-          .includes(filterContactsList));
-    };
-  //       const getFilteredContacts = useMemo(() => {
-  //   return contacts.filter(contact =>
-  //     contact.name.toLowerCase().includes(filter.toLowerCase()),
-  //   );
+  const getFilteredContacts = () => {
+    const filterContactsList = contacts.filter(contact => {
+      return contact.name.toLowerCase().includes(filter.toLowerCase());
+    });
+    return filterContactsList;
+  };
+  //  const getFilteredContacts = useMemo(() => {
+  //  const filterContactsList = contacts.filter(contact => {
+  //     return contact.name.toLowerCase().includes(filter.toLowerCase());
+  //   });
+  //   return filterContactsList;
+  // };
   // }, []);
 
   
 
-      const handleChange = e => {
-    const { name, value } = e.target;
-    setContacts({ [name]: value });
+     const handleChange = e => {
+    const { value } = e.target;
+    setFilter(value);
   };
-
    
 
   
