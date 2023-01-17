@@ -5,20 +5,30 @@ import css from './ContactForm.module.css';
 
 
 export const ContactForm =  ({addNewContact}) => {
- const [state, setState] = useState({
-  name:'',
-  number:'',
- })
+
+   const [name, setName] = useState('');
+  const [number, setNumber] = useState('');
+
 
  const handleChange = e => {
   const { name,value } = e.target;
-  setState(prev => ({...prev,[name]:value}))
-};
+   switch (name) {
+      case 'name':
+        setName(value);
+        break;
+      case 'number':
+        setNumber(value);
+        break;
+      default:
+        return;
+    }
+  };
 
 const  handleSubmit = e => {
    e.preventDefault();
-  addNewContact({ ...state });
-  setState({ name: '', number: '' });
+  addNewContact({name, number});
+    setName('');
+    setNumber('');
 
   };
 
@@ -35,7 +45,7 @@ const  handleSubmit = e => {
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           required
           placeholder="Enter name"
-          value={state.name}
+          value={name}
           onChange={handleChange}
         />
         <label htmlFor='number' className={css.formLabel}>Number </label>
@@ -48,7 +58,7 @@ const  handleSubmit = e => {
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required
           placeholder="Enter phone number"
-          value={state.number}
+          value={number}
           onChange={handleChange}
         />
         <button  className={css.formBtn} type="submit" >
